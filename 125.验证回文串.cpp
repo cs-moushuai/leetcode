@@ -47,5 +47,8 @@ public:
 
 int main(void)
 {
+    Solution sy;
+    cout<<sy.isPalindrome("eio");
+
     return 0;
 }
