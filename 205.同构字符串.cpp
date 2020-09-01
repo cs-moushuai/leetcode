@@ -66,5 +66,7 @@ public:
 
 int main(void)
 {
+    Solution sy;
+    sy.isIsomorphic();
     return 0;
 }

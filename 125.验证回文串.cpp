@@ -14,7 +14,7 @@ public:
     bool isPalindrome(string s)
     {
         string str;
-        for(auto i: s)
+        for (auto i : s)
         {
             if (isalnum(i))
             {
@@ -24,7 +24,6 @@ public:
                 }
                 str += i;
             }
-            
         }
         /*
         auto head = str.begin();
@@ -39,8 +38,8 @@ public:
 
         return true;
         */
-       string rstr(str.rbegin(),str.rend());
-       return str == rstr;
+        string rstr(str.rbegin(), str.rend());
+        return str == rstr;
     }
 };
 // @lc code=end
@@ -48,7 +47,7 @@ public:
 int main(void)
 {
     Solution sy;
-    cout<<sy.isPalindrome("eio");
+    cout << sy.isPalindrome("eio");
 
     return 0;
 }
