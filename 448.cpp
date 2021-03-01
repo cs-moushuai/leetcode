@@ -1,7 +1,5 @@
-#include <iostream>
-#include <vector>
 #include <algorithm>
-#include <iterator>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -10,26 +8,21 @@ class Solution
 public:
     vector<int> findDisappearedNumbers(vector<int>& nums)
     {
-        if(nums.empty())
+        if (nums.empty())
+            return {};
+        int len = nums.size();
+        vector<int> vec(len + 1);
+        for (auto i : nums)
         {
-            return vector<int>();
+            vec[i]++;
         }
-
-        vector<int> result;
-        sort(nums.begin(), nums.end());
-        for(auto i = nums.cbegin(); i != nums.cend() - 1; i++)
+        vector<int> res;
+        for (int i = 1; i < len + 1; ++i)
         {
-            if(*(i + 1) - *i != 1)
-            {
-                for(size_t j = 1; j < * (i + 1) - *i; j++)
-                {
-                    result.push_back(*i + j);
-                }
-            }
+            if (vec[i] == 0)
+                res.emplace_back(i);
         }
-
-        return result;
-
+        return res;
     }
 };
 

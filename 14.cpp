@@ -1,3 +1,5 @@
+#include <algorithm>
+#include <cstdint>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -7,47 +9,44 @@ using namespace std;
 class Solution
 {
 public:
-	string longestCommonPrefix(vector<string> &strs)
-	{
-		string result, temp = *(strs.cbegin());
-		
-		if (temp == "")
-		{
-			return temp;	
-		}
-			
-		
+    string longestCommonPrefix(vector<string> &strs)
+    {
+        string res;
+        int len = strs.size();
+        if (len == 0)
+            return "";
+        int min_len = INT8_MAX;
+        for (auto &i : strs)
+        {
+            int tmp = i.size();
+            if (tmp < min_len)
+                min_len = tmp;
+        }
+        for (int j = 0; j < min_len; ++j)
+        {
+            char c = strs[0][j];
+            bool flag = true;
+            for (int i = 1; i < len; ++i)
+            {
+                if (c != strs[i][j])
+                    flag = false;
+            }
+            if (!flag)
+                return res;
+            res += c;
 
-		for (auto i = strs.cbegin() + 1; i != strs.cend(); i++)
-		{
-			result = "";
-			//string CommonPrefix(string s1,string s2),CommonPrefix(temp, *i)
-			for (string::size_type j = 0; j  != temp.size() && j  != i->size(); ++j)
-			{
-				if (temp[j] == (*i)[j])
-				{
-					result += temp[j];
-				}
-				else
-				{
-					break;
-				}
-			}
-
-			temp = result;
-		}
-
-		return result;
-	}
+        }
+        return res;
+    }
 };
 
 int main(void)
 {
 
-	Solution sy;
-	vector<string> s = {"filx", "fila", "filb"};
+    Solution sy;
+    vector<string> s = {"filx", "fila", "filb"};
 
-	cout << sy.longestCommonPrefix(s) << endl;
+    cout << sy.longestCommonPrefix(s) << endl;
 
-	return 0;
+    return 0;
 }

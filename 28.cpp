@@ -1,8 +1,25 @@
-#include <iostream>
+#include <bits/stdc++.h>
+#include <string>
 
 using namespace std;
 
 class Solution
+{
+public:
+    int strStr(string haystack, string needle)
+    {
+        if (needle.empty())
+            return 0;
+
+        auto res = haystack.find(needle);
+        if (res == string::npos)
+            return -1;
+
+        return res;
+    }
+};
+
+class Solution2
 {
 public:
     int strStr(string haystack, string needle)
