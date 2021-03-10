@@ -6,3 +6,5 @@ sy*
 build/
 trash/
 .vimspector.json
+*.sh
+Netrw Settings
