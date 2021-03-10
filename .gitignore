@@ -1,4 +1,7 @@
-.history
-backup
+.history/
+.vscode/
+backup/
 a.out
 sy*
+build/
+trash/
