@@ -1,46 +1,38 @@
 #include <bits/stdc++.h>
 #include <climits>
+#include <utility>
 #include <vector>
 
 using namespace std;
 
-struct item
+struct Item
 {
     int key;
     int value;
     int visited;
-    item(): key(0), value(0), visited(0) {}
+    Item(): key(0), value(0), visited(INT_MAX) {}
 };
 
 
 class LRUCache
 {
 private:
-    vector<item> cache;
+    vector<Item> cache;
     int capacity_;
     int curr;
     int visited;
-    deque<int> que;
-    void update(int pos)
+    int findMin()
     {
-        que.push_back(pos);
-    }
-    int pop_que()
-    {
-        int tmp = que.front();
-        auto res = find(que.begin() + 1, que.end(), tmp);
-        if (res == que.end())
+        int min_val = 0;
+        for (int i = 1; i < curr; ++i)
         {
-            que.pop_front();
-            return tmp;
+            if (cache[i].visited < cache[min_val].visited)
+            {
+                min_val = i;
+            }
         }
-        else
-        {
-            que.pop_front();
-            return pop_que();
-        }
+        return min_val;
     }
-
 public:
     LRUCache(int capacity): cache(capacity), capacity_(capacity), curr(0), visited(1)
     {
@@ -52,7 +44,7 @@ public:
         {
             if (cache[i].key == key)
             {
-                que.push_back(i);
+                cache[i].visited = visited++;
                 return cache[i].value;
             }
         }
@@ -66,17 +58,17 @@ public:
             if (cache[i].key == key)
             {
                 cache[i].value = value;
-                que.push_back(i);
+                cache[i].visited = visited++;
                 return;
             }
         }
         if (capacity_ == curr)
         {
             //delete least recently unit and insert in proper position
-            int pos = pop_que();
-            cache[pos].key = key;
-            cache[pos].value = value;
-            que.push_back(pos);
+            auto res = findMin();
+            cache[res].key = key;
+            cache[res].value = value;
+            cache[res].visited = visited++;
 
         }
         else
@@ -84,7 +76,7 @@ public:
             cache[curr].key = key;
             cache[curr].value = value;
 
-            que.push_back(curr);
+            cache[curr].visited = visited++;
             ++curr;
         }
     }
